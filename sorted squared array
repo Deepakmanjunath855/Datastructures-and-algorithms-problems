@@ -1,0 +1,27 @@
+#include <vector>
+using namespace std;
+
+vector<int> sortedSquaredArray(vector<int> array) {
+  // Write your code here.
+	int smallest=0;
+	int largest=array.size()-1;
+	int index=array.size()-1;
+	vector<int>sqr(array.size(),0);
+		int num=0;
+		while(smallest<=largest && index>=0){
+			if(abs(array[smallest])<abs(array[largest])){
+				num=array[largest]*array[largest];
+				largest--;
+				sqr[index]=num;
+				index--;
+			}
+			else{
+				num=array[smallest]*array[smallest];
+				sqr[index]=num;
+				index--;
+				smallest++;
+			}
+		}
+	return sqr;
+			
+}
