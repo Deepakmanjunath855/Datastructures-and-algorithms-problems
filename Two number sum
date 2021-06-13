@@ -1,0 +1,21 @@
+include<bits/stdc++.h>
+#include <vector>
+using namespace std;
+
+vector<int> twoNumberSum(vector<int> array, int targetSum) {
+  // Write your code here.
+	map<int,int>val;
+	for(int i=0;i<array.size();i++){
+		
+		int probableans=targetSum-array[i];
+		
+		if(val.count(probableans)>0){
+			
+			return{probableans,array[i]};
+		}
+		else{
+		val[array[i]]=1;
+		}
+	}
+  return {};
+}
