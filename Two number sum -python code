@@ -1,0 +1,10 @@
+def twoNumberSum(array, targetSum):
+    # Write your code here.
+    val={}
+	for i in range(len(array)):
+		probablesum=targetSum-array[i]
+		if probablesum in val:
+				   return[probablesum,array[i]]
+		else:
+				   val[array[i]]=True
+	return[]
