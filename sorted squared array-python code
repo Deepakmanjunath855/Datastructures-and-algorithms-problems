@@ -1,0 +1,20 @@
+def sortedSquaredArray(array):
+    # Write your code here.
+	index=len(array)-1;
+	smallest=0;
+	largest=len(array)-1;
+	sortedsq=[0 for _ in array]
+	num=0
+	while(smallest<=largest and index>=0):
+		if(abs(array[smallest])<abs(array[largest])):
+			num=array[largest]*array[largest]
+			sortedsq[index]=num
+			index=index-1
+			largest=largest-1
+		else:
+			num=array[smallest]*array[smallest]
+			sortedsq[index]=num
+			index=index-1
+			smallest=smallest+1
+			
+    return sortedsq
