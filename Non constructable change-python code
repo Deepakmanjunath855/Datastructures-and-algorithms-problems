@@ -1,0 +1,10 @@
+def nonConstructibleChange(coins):
+    # Write your code here.
+	coins.sort()
+	count=0
+	for item in coins:
+		if item>count+1:
+			return count+1
+		count=count+item
+	return count+1
+    
