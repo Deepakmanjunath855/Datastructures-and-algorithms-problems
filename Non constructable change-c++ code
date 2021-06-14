@@ -1,0 +1,17 @@
+#include <vector>
+#include<bits/stdc++.h>
+using namespace std;
+
+int nonConstructibleChange(vector<int> coins) {
+  // Write your code here.
+	sort(coins.begin(), coins.end());
+	int n=coins.size();
+	int count=0;
+	for(int i =0;i<coins.size();i++){
+	if(coins[i]>count+1){
+		return count+1;
+	}
+			count=count+coins[i];
+	}
+  return count+1;
+}
