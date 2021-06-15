@@ -1,0 +1,25 @@
+def smallestDifference(arrayOne, arrayTwo):
+    # Write your code here.
+	arrayOne.sort()
+	arrayTwo.sort()
+	smallest=float("inf")
+	current=float("inf")
+	val=[]
+	i=0
+	j=0
+	while(i<len(arrayOne) and j<len(arrayTwo)):
+		firstnum=arrayOne[i]
+		secondnum=arrayTwo[j]
+		if(firstnum>secondnum):
+			current=firstnum-secondnum
+			j=j+1
+		elif(firstnum<secondnum):
+			current=secondnum-firstnum
+			i=i+1
+		else:
+			return [firstnum,secondnum]
+		if(current<smallest):
+			smallest=current
+			val=[firstnum,secondnum]
+			
+    return val
