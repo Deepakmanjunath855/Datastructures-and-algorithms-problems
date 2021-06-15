@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+#include<climits>
+#include <vector>
+
+using namespace std;
+
+vector<int> smallestDifference(vector<int> arrayOne, vector<int> arrayTwo) {
+  // Write your code here.
+	sort(arrayOne.begin(),arrayOne.end());
+	sort(arrayTwo.begin(),arrayTwo.end());
+	int smallest=INT_MAX;
+	int current=INT_MAX;
+	int i=0;
+	int j=0;
+	vector<int>val;
+	while(i<arrayOne.size() && j<arrayTwo.size()){
+		int firstnum=arrayOne[i];
+		int secondnum=arrayTwo[j];
+		if(arrayOne[i]<arrayTwo[j]){
+			current=arrayTwo[j]-arrayOne[i];
+			i++;
+		}else if(arrayOne[i]>arrayTwo[j]){
+			current=arrayOne[i]-arrayTwo[j];
+			j++;
+		}
+		else{
+			return vector<int>{arrayOne[i],arrayTwo[j]};
+		}
+		if(smallest>current){
+			smallest=current;
+			val={firstnum,secondnum};
+		}
+	}
+  return val;
+}
