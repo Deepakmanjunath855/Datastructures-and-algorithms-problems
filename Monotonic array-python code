@@ -1,0 +1,13 @@
+def isMonotonic(array):
+    # Write your code here.
+	isincrease=True
+	isdecrease=True
+
+	for i in range(1,len(array)):
+		if array[i]<array[i-1]:
+			isincrease=False
+			
+		if(array[i]>array[i-1]):
+			isdecrease=False
+			
+	return isincrease or isdecrease	
