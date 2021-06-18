@@ -1,0 +1,29 @@
+def spiralTraverse(array):
+    # Write your code here.
+	val = []
+	rowst=0
+	rowend=len(array)-1
+	colst=0
+	colend=len(array[0])-1
+	
+	while(rowst<=rowend and colst<=colend):
+		for col in range(colst,colend+1):
+			val.append(array[rowst][col])
+	
+		for row in range(rowst+1,rowend+1):
+			val.append(array[row][colend])
+			
+		for col in reversed(range(colst,colend)):
+			if rowst==rowend:
+				break
+			val.append(array[rowend][col])
+			
+		for row in reversed(range(rowst+1,rowend)):
+			if colst==colend:
+				break
+			val.append(array[row][colst])
+		rowst+=1
+		rowend-=1
+		colst+=1
+		colend-=1
+	return val
