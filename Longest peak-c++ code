@@ -1,0 +1,32 @@
+using namespace std;
+#include<bits/stdc++.h>
+
+int longestPeak(vector<int> array) {
+  // Write your code here.
+	if(array.size()<3){
+		return 0;
+	}
+	int longestpeak=0;
+	int i=1;
+	while(i<array.size()-1){
+	bool ispeak= array[i-1]<array[i] &&array[i+1]<array[i];
+	if(!ispeak){
+		i++;
+	}
+	else{
+		int leftidx=i-2;
+		while(leftidx>=0 && array[leftidx]<array[leftidx+1]){
+			leftidx--;
+		}
+		int rightidx=i+2;
+		while(rightidx<=array.size()-1 && array[rightidx]<array[rightidx-1]){
+			rightidx++;
+		}
+		i=rightidx;
+		int currentpeaklength=rightidx-leftidx-1;
+		longestpeak=max(longestpeak,currentpeaklength);
+		}
+	
+	}
+  return longestpeak;
+}
