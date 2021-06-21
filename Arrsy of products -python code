@@ -1,0 +1,21 @@
+def arrayOfProducts(array):
+    # Write your code here.
+	val=[1 for _ in range(len(array))]
+	leftarray=[1 for _ in range(len(array))]
+	rightarray=[1 for _ in range(len(array))]
+	
+	prod=1
+	for i in range(len(array)):
+		leftarray[i]=prod
+		prod=prod*array[i]
+		
+	prod=1
+	for i in reversed(range(len(array))):
+		rightarray[i]=prod
+		prod=prod*array[i]
+		
+					  
+	for i in range(len(array)):
+		val[i]=leftarray[i]*rightarray[i]
+					  
+    return val
