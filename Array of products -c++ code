@@ -1,0 +1,25 @@
+#include <vector>
+
+using namespace std;
+
+vector<int> arrayOfProducts(vector<int> array) {
+  // Write your code here.
+	vector<int>val(array.size(),1);
+	vector<int>leftarray(array.size(),1);
+	vector<int>rightarray(array.size(),1);
+	int prod=1;
+	
+	for(int i=1;i<array.size();i++){
+		prod=prod*array[i-1];
+		leftarray[i]=prod;
+	}
+	prod=1;
+	for(int i=array.size()-2;i>=0;i--){
+		prod=prod*array[i+1];
+		rightarray[i]=prod;
+	}
+	for(int i=0;i<array.size();i++){
+		val[i]=leftarray[i]*rightarray[i];
+	}
+  return val;
+}
