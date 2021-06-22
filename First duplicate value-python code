@@ -1,0 +1,9 @@
+def firstDuplicateValue(array):
+    # Write your code here.
+	val={}
+	for i in range(len(array)):
+		if array[i] in val:
+			return array[i]
+		else:
+			val[array[i]]=1
+    return -1
