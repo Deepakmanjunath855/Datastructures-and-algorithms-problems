@@ -1,0 +1,31 @@
+#include <vector>
+using namespace std;
+
+vector<vector<int>> fourNumberSum(vector<int> array, int targetSum){
+	vector<vector<int>>quad;
+	map<int,vector<vector<int>>>allpairs;
+	
+	for(int i=1;i<array.size()-1;i++){
+		for(int j=i+1;j<array.size();j++){
+			int sum=array[i]+array[j];
+			int diff=targetSum-sum;
+			if(allpairs.find(diff)!=allpairs.end()){
+				for(vector<int>pair:allpairs[diff]){
+						pair.push_back(array[i]);
+					  pair.push_back(array[j]);
+						quad.push_back(pair);
+				}
+			}
+		}
+		for(int k=0;k<i;k++){
+			int sum=array[k]+array[i];
+			if(allpairs.find(sum) == allpairs.end()){
+				allpairs[sum]=vector<vector<int>>{{array[i],array[k]}};
+			}
+			else{
+				allpairs[sum].push_back(vector<int>{array[k],array[i]});
+			}
+		}
+	}
+	return quad;
+}
