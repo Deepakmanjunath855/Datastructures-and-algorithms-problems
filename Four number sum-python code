@@ -1,0 +1,21 @@
+def fourNumberSum(array, targetSum):
+    # Write your code here.
+	quad=[]
+	allpair={}
+	
+	for i in range(1,len(array)-1):
+		for j in range(i+1,len(array)):
+			currsum=array[i]+array[j]
+			diff=targetSum-currsum
+			if diff in allpair:
+				for pair in allpair[diff]:
+					quad.append(pair + [array[i],array[j]])
+					
+		for k in range(i):
+			cursum=array[i]+array[k]
+			if cursum not in allpair:
+				allpair[cursum]=[[array[i],array[k]]]
+			else:
+				allpair[cursum].append([array[k],array[i]])
+	return quad
+
