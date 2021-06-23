@@ -1,0 +1,32 @@
+#include <vector>
+using namespace std;
+
+vector<vector<int>> mergeOverlappingIntervals(vector<vector<int>> intervals) {
+  // Write your code here.
+	vector<vector<int>> sortedintervals=intervals;
+	sort(sortedintervals.begin(),sortedintervals.end(),
+			 [](vector<int>a,vector<int>b){return a[0]<b[0];});
+	
+	vector<vector<int>*>mergedintervals;
+	vector<int>*currentinterval=&sortedintervals[0];
+	mergedintervals.push_back(currentinterval);
+	
+	for(auto &nextinterval:sortedintervals){
+		int currentintervalend=currentinterval->at(1);
+		int nextintervalstart=nextinterval[0];
+		int nextintervalend=nextinterval[1];
+		
+		if(currentintervalend >= nextintervalstart){
+			currentinterval->at(1)=max(currentintervalend,nextintervalend);
+		}
+		else{
+			currentinterval=&nextinterval;
+			mergedintervals.push_back(currentinterval);
+		}
+	}
+  vector<vector<int>>mergedintervalscopy;
+	for(auto intervals :mergedintervals){
+		mergedintervalscopy.push_back(*intervals);
+	}
+	return mergedintervalscopy;
+}
