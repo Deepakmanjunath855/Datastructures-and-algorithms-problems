@@ -1,0 +1,20 @@
+def mergeOverlappingIntervals(intervals):
+    # Write your code here.
+	sortedintervals=sorted(intervals,key=lambda x:x[0])
+	
+	mergedintervals=[]
+	currentinterval=sortedintervals[0]
+	mergedintervals.append(currentinterval)
+	
+	for nextinterval in sortedintervals:
+		_,currentintervalend=currentinterval
+		nextintervalstart,nextintervalend=nextinterval
+		
+		if(currentintervalend>=nextintervalstart):
+			currentinterval[1]=max(currentintervalend,nextintervalend)
+		else:
+			currentinterval=nextinterval
+			mergedintervals.append(currentinterval)
+		
+	return mergedintervals
+
