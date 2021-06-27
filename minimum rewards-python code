@@ -1,0 +1,20 @@
+def minRewards(scores):
+    # Write your code here.
+	rewards=[1 for _ in scores]
+	num=0
+	
+	for i in range(len(scores)-1):
+		if scores[i+1]>scores[i]:
+			rewards[i+1]=rewards[i]+1
+		else:
+			continue
+	
+	for i in reversed(range(1,len(scores))):
+		if scores[i-1]>scores[i]:
+			rewards[i-1]=max(rewards[i]+1,rewards[i-1])
+		else:
+			continue
+	for i in rewards:
+		num=num+i
+		
+	return num
