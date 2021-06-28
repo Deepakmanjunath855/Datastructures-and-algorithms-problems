@@ -1,0 +1,55 @@
+#include <vector>
+
+using namespace std;
+bool isoutofbound(int row,int col,int height,int width){
+	return row>height || row<0 || col<0 ||col>width;
+	
+}
+
+vector<int> zigzagTraverse(vector<vector<int>> array) {
+  // Write your code here.
+	vector<int>val;
+	int height=array.size()-1;
+	int width=array[0].size()-1;
+	bool goingdown=true;
+	int row=0;
+	int col=0;
+	
+	while(! isoutofbound(row,col,height,width)){
+	val.push_back(array[row][col]);
+	if(goingdown){
+
+		if(col==0 || row==height){
+			goingdown=false;
+			if(row==height){
+				col++;
+			}
+			else{
+				row++;
+			}
+		}
+		else{
+			row++;
+			col--;
+		}
+	}
+	else{
+		if(row==0 || col==width){
+			goingdown=true;
+			if(col==width){
+				row++;
+			}
+			else{
+				col++;
+			}
+		}
+		else{
+			row--;
+			col++;
+		}
+	}
+	
+	}
+	
+  return val;
+}
