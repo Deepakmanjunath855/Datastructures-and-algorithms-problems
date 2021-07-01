@@ -1,0 +1,19 @@
+using namespace std;
+
+string caesarCypherEncryptor(string str, int key) {
+  // Write your code here.
+	int newkey=key % 26;
+	vector<char>val;
+	
+	for(int i=0;i<str.length();i++){
+		int nlc=str[i]+newkey;
+		if (nlc<=122){
+			val.push_back(nlc);
+		}
+		else{
+			val.push_back(96+(nlc % 122));
+		}
+	}
+	
+  return string(val.begin(),val.end());
+}
