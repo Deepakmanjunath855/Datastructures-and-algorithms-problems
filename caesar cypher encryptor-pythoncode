@@ -1,0 +1,13 @@
+def caesarCipherEncryptor(string, key):
+    # Write your code here.
+	newkey=key%26
+	new=[]
+	
+	for i in range(len(string)):
+		nlc=ord(string[i])+newkey
+		if nlc<=122:
+			new.append(chr(nlc))
+		else:
+			new.append(chr(96+(nlc%122)))
+		
+    return "".join(new)
