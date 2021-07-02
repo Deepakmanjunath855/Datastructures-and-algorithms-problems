@@ -1,0 +1,31 @@
+using namespace std;
+#include<bits/stdc++.h>
+
+string runLengthEncoding(string str) {
+	vector<char> rle;
+	int count=1;
+	int i=0;
+	while(i<str.length()){
+		if(str[i]==str[i+1]){
+			count++;
+			i++;
+		}
+		else{
+			string c=to_string(count);
+			rle.push_back(c[0]);
+			rle.push_back(str[i]);
+			count=1;
+			i++;
+		}
+		if(count==9){
+			string k = to_string(count);
+			rle.push_back(k[0]);
+			rle.push_back(str[i]);
+			count=1;
+			i++;
+		}
+		
+	}
+	string encoded(rle.begin(),rle.end());
+	return encoded;
+}
