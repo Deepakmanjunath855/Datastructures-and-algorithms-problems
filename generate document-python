@@ -1,0 +1,16 @@
+def generateDocument(characters, document):
+    # Write your code here.
+	doc={}
+	
+	for item in characters:
+		if item not in doc:
+			doc[item]=0
+			
+		doc[item]+=1
+	
+	for item in document:
+		if item not in doc or doc[item]==0:
+			return False
+		doc[item]-=1
+
+    return True
