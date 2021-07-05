@@ -1,0 +1,21 @@
+def firstNonRepeatingCharacter(string):
+    # Write your code here.
+	char={}
+	minidx=float("inf")
+	
+	for i in range(len(string)):
+		if string[i] not in char:
+			char[string[i]]=0
+			
+		char[string[i]]+=1
+	
+	for i in range(len(string)):
+		if char[string[i]]==1:
+			minidx=min(minidx,i)
+		else:
+			continue
+		
+    if minidx==float("inf"):
+		return -1
+	else:
+		return minidx
