@@ -1,0 +1,11 @@
+def groupAnagrams(words):
+    # Write your code here.
+	anagram={}
+	for word in words:
+		sortedword="".join(sorted(word))
+		if sortedword in anagram:
+			anagram[sortedword].append(word)
+		else:
+			anagram[sortedword]=[word]
+	
+    return list(anagram.values())
