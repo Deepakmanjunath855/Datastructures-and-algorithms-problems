@@ -1,0 +1,27 @@
+#include <vector>
+#include<bits/stdc++.h>
+
+using namespace std;
+
+vector<vector<string>> groupAnagrams(vector<string> words) {
+  // Write your code here.
+	map<string,vector<string>>anagram;
+	
+	for(int i=0;i<words.size();i++){
+		string str=words[i];
+		sort(str.begin(),str.end());
+		
+		if(anagram.find(str)!=anagram.end()){
+			anagram[str].push_back(words[i]);
+		}
+		else{
+			anagram[str]={words[i]};
+		}
+	}
+	vector<vector<string>>val={};
+	for(auto it:anagram){
+		val.push_back(it.second);
+	}
+	return val;
+  return {};
+}
