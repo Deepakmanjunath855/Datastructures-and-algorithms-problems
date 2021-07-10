@@ -1,0 +1,39 @@
+using namespace std;
+#include<bits/stdc++.h>
+
+void reverselist(vector<string> &lst){
+	int i=0;
+	int j=lst.size()-1;
+	while(i<j){
+		string temp=lst[i];
+		lst[i]=lst[j];
+		lst[j]=temp;
+		i++;
+		j--;
+	}
+}
+
+string reverseWordsInString(string str) {
+  // Write your code here.
+	vector<string>words;
+	int startingidx=0;
+	
+	for(int i=0;i<str.length();i++){
+		if(str[i]==' '){
+			words.push_back(str.substr(startingidx,i-startingidx));
+			startingidx=i;
+		}
+		else if(str[startingidx]==' '){
+			words.push_back(" ");
+			startingidx=i;
+		}
+
+	}
+	words.push_back(str.substr(startingidx));
+	reverselist(words);
+	string output;
+	for(auto word:words){
+		output+=word;
+	}
+	return output;
+}
