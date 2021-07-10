@@ -1,0 +1,27 @@
+def reverseWordsInString(string):
+    # Write your code here.
+	words=[]
+	startidx=0
+	
+	for i in range(len(string)):
+		if string[i]==" ":
+			words.append(string[startidx:i])
+			startidx=i
+		elif string[startidx]==" ":
+			words.append(" ")
+			startingidx=i
+			
+	words.append(string[startidx:])
+	
+	reverselist(words)
+	return "".join(words)
+	
+    
+def reverselist(list):
+	start=0
+	end=len(list)-1
+	while start<end:
+		list[start],list[end]=list[end],list[start]
+		start+=1
+		end-=1
+	
