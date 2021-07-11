@@ -1,0 +1,36 @@
+def minimumCharactersForWords(words):
+	maxcharfreq={}
+	
+	for word in words:
+		charfreq=charfrequency(word)
+		updatemaxfreq(charfreq,maxcharfreq)
+		
+	return makearray(maxcharfreq)
+	
+
+def charfrequency(string):
+	charfreq={}
+	
+	for item in string:
+		if item not in charfreq:
+			charfreq[item]=0
+			
+		charfreq[item]+=1
+	return charfreq
+
+def updatemaxfreq(charfreq,maxcharfreq):
+	for item in charfreq:
+		
+		if item in maxcharfreq:
+			maxcharfreq[item]=max(charfreq[item],maxcharfreq[item])
+		else:	
+			maxcharfreq[item]=charfreq[item]
+
+def makearray(maxcharfreq):
+	freq=[]
+	for item in maxcharfreq:
+		count=maxcharfreq[item]
+		for _ in range(count):
+			freq.append(item)
+	return freq
+	
