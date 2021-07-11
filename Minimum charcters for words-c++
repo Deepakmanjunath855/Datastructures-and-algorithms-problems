@@ -1,0 +1,47 @@
+#include <vector>
+#include<bits/stdc++.h>
+using namespace std;
+
+map<char,int>charfreqcount(string word){
+	map<char,int>freqcount;
+	for(int i=0;i<word.length();i++){
+		if(freqcount.find(word[i])==freqcount.end()){
+			freqcount[word[i]]=0;
+		}
+			freqcount[word[i]]++;
+		
+	}
+	return freqcount;
+}
+
+void updatemaxcharfreqcount( map<char,int>&charfreq,map<char,int>&maxcharfreq){
+	for( auto &[ch,freq] :charfreq){
+		if(maxcharfreq.find(ch)!=maxcharfreq.end()){
+			maxcharfreq[ch]=max(maxcharfreq[ch],charfreq[ch]);
+		}
+		else{
+			maxcharfreq[ch]=charfreq[ch];
+		}
+	}	
+}
+
+vector<char>arrayfromcount(map<char,int>&maxcharfreq){
+	 vector<char>res;
+	for(auto &[ch,freq] :maxcharfreq){
+		for( int i=0;i<freq;i++){
+			res.push_back(ch);
+		}
+	}
+	return res;
+}
+
+vector<char> minimumCharactersForWords(vector<string> words) {
+  // Write your code here.
+	map<char,int>maxcharfreq;
+	
+	for(auto word : words){
+		map<char,int>charfreq=charfreqcount(word);
+		updatemaxcharfreqcount(charfreq,maxcharfreq);
+	}
+	return arrayfromcount(maxcharfreq);
+}
