@@ -1,0 +1,22 @@
+using namespace std;
+#include<bits/stdc++.h>
+
+string longestSubstringWithoutDuplication(string str) {
+  // Write your code here.
+	map<char,int>lastseen;
+	vector<int> longest={0,1};
+	int startidx=0;
+	for(int i=0;i<str.length();i++){
+		char ch=str[i];
+		if (lastseen.find(ch)!=lastseen.end()){
+			startidx=max(startidx,lastseen[ch]+1);
+		}
+		if(longest[1]-longest[0]<i+1-startidx){
+			longest={startidx,i+1};
+		}
+		lastseen[ch]=i;
+	}
+	string result=str.substr(longest[0],longest[1]-longest[0]);
+	return result;
+	
+}
