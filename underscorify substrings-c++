@@ -1,0 +1,75 @@
+using namespace std;
+#include<bits/stdc++.h>
+
+vector<vector<int>> getlocations(string str,string substr){
+	int startidx=0;
+	vector<vector<int>>locations;
+	
+	while(startidx<str.length()){
+		int nextidx=str.find(substr,startidx);
+		if(nextidx !=string::npos){
+			locations.push_back(vector<int>{nextidx,int(nextidx+substr.length())});
+			startidx=nextidx+1;
+		}else{
+			break;
+		}
+	}
+	
+	return locations;
+}
+
+vector<vector<int>>collapse(vector<vector<int>>locations){
+	if(locations.empty()){
+		return locations;
+	}
+	vector<vector<int>>newlocations={locations[0]};
+	vector<int> *previous=&newlocations[0];
+	for(int i=1;i<locations.size();i++){
+		vector<int> *current=&locations[i];
+		if (current->at(0)<=previous->at(1)){
+			previous->at(1)=current->at(1);
+		}
+		else{
+			newlocations.push_back(*current);
+			previous=&newlocations[newlocations.size()-1];
+		}
+	}
+	return newlocations;
+}
+
+string underscorify(string str,vector<vector<int>>locations){
+	int stringidx=0;
+	int locationidx=0;
+	bool inbetween=false;
+	vector<string>finalchar;
+	int i=0;
+	while(stringidx<str.length() && locationidx<locations.size()){
+		if(stringidx==locations[locationidx][i]){
+			finalchar.push_back("_");
+			inbetween=!inbetween;
+			if(!inbetween){
+				locationidx++;
+			}
+			i= i==1?0:1;
+		}
+		string s(1,str[stringidx]);
+		finalchar.push_back(s);
+		stringidx++;
+		
+	}
+	if(locationidx<locations.size()){
+		finalchar.push_back("_");
+	}
+	else if(stringidx<str.length()){
+		finalchar.push_back(str.substr(stringidx));
+	}
+	return accumulate(finalchar.begin(),finalchar.end(),string());
+	}
+	
+
+string underscorifySubstring(string str, string substr) {
+  // Write your code here.
+  vector<vector<int>>locations=collapse(getlocations(str,substr));
+	
+	return underscorify(str,locations);
+}
