@@ -1,0 +1,70 @@
+#include <vector>
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<char> getnewpattern(string pattern){
+	vector<char> patternletters(pattern.begin(),pattern.end());
+	if(pattern[0]=='x'){
+		return patternletters;
+	}
+	else{
+		transform(patternletters.begin(),patternletters.end(),
+				patternletters.begin(),[](char c)->char{return c =='y'?'x':'y';});
+		return patternletters;
+	}
+}
+
+int getcountsandfirstypos(vector<char>pattern,map<char,int>*counts){
+int firstypos=-1;
+	for(int i=0;i<pattern.size();i++){
+		char c=pattern[i];
+		counts->at(c)++;
+		if(c=='y' && firstypos ==-1){
+			firstypos=i;
+		}
+	}
+	return firstypos;
+}
+
+
+vector<string> patternMatcher(string pattern, string str) {
+  // Write your code here.
+	if(pattern.length()>str.length()){
+		return vector<string>{};
+	}
+	vector<char> newpattern=getnewpattern(pattern);
+	bool didswitch= newpattern[0]!=pattern[0];
+	map<char,int>counts({{'x',0},{'y',0}});
+	int firstypos = getcountsandfirstypos(newpattern,&counts);
+	if(counts['y']!=0){
+		for(int lenofx=1;lenofx<str.length();lenofx++){
+			double lenofy=((double)str.length()-(double)lenofx*(double)counts['x'])/(double)counts['y'];
+			if(lenofy<=0 || fmod(lenofy,1)!=0){
+				continue;
+			}
+			int yidx=firstypos*lenofx;
+			string x=str.substr(0,lenofx);
+			string y=str.substr(yidx,lenofy);
+			vector<string> potentialmatch(newpattern.size(),"");
+			transform(newpattern.begin(),newpattern.end(),potentialmatch.begin(),
+							 [x,y](char c)->string{return c == 'x'?x:y;});
+			if(str == accumulate(potentialmatch.begin(),potentialmatch.end(),string(""))){
+				return !didswitch? vector<string>{x,y}:vector<string>{y,x};
+			}
+		}
+	}
+	else{
+		double lenofx=str.length()/counts['x'];
+		if(fmod(lenofx,1)==0){
+			string x=str.substr(0,lenofx);
+			vector<string>potentialmatch(newpattern.size(),"");
+			transform(newpattern.begin(),newpattern.end(),potentialmatch.begin(),
+								[x](char c)->string{return x;});
+			if(str== accumulate(potentialmatch.begin(),potentialmatch.end(),string(""))){
+				return !didswitch ? vector<string>{x,""}: vector<string>{"",x};
+			}
+		}
+	}
+	return vector<string>{};
+}
+
