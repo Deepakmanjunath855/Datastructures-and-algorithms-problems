@@ -1,0 +1,18 @@
+//using hasing
+using namespace std;
+#include<bits/stdc++.h>
+
+int getNthFib(int n) {
+  // Write your code here.
+	map<int,int>memorize;
+	memorize[1]=0;
+	memorize[2]=1;
+  if(memorize.find(n)!=memorize.end()){
+	return 	memorize[n];
+	}
+	else{
+		memorize[n]=getNthFib(n-1)+getNthFib(n-2);
+		return memorize[n];
+		
+	}
+}
