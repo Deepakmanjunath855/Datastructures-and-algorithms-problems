@@ -1,0 +1,20 @@
+mapping={"0":["0"],"1":["1"],"2":["a","b","c"],"3":["d","e","f"],"4":["g","h","i"],
+		 "5":["j","k","l"],"6":["m","n","o"],"7":["p","q","r","s"],"8":["t","u","v"]
+		 ,"9":["w","x","y","z"]}
+def phoneNumberMnemonics(phonenumber):
+    # Write your code here.
+	current=['0']*len(phonenumber)
+	mnemonics=[]
+	phonenumberhelper(0,current,mnemonics,phonenumber)
+    return mnemonics
+
+def phonenumberhelper(idx,current,mnemonics,phonenumber):
+	if idx==len(phonenumber):
+		temp="".join(current)
+		mnemonics.append(temp)
+	else:
+		val=phonenumber[idx]
+		letters=mapping[val]
+		for letter in letters:
+			current[idx]=letter
+			phonenumberhelper(idx+1,current,mnemonics,phonenumber)
