@@ -1,0 +1,45 @@
+using namespace std;
+#include<bits/stdc++.h>
+
+class OrgChart {
+public:
+  char name;
+  vector<OrgChart *> directReports;
+
+  OrgChart(char name) {
+    this->name = name;
+    this->directReports = {};
+  }
+
+  void addDirectReports(vector<OrgChart *> directReports);
+};
+struct orginfo{
+	OrgChart *lowestcommonmanager;
+	int numberofreports;	
+};
+
+orginfo getorginfo(OrgChart *manager,OrgChart *reportone,
+									 OrgChart *reporttwo){
+	int numberofreports=0;
+	for(OrgChart *directreport: manager->directReports){
+		orginfo Org_info=getorginfo(directreport,reportone,reporttwo);
+		if(Org_info.lowestcommonmanager !=nullptr){
+			return Org_info;
+		}
+		numberofreports+=Org_info.numberofreports;
+	}
+	if(manager==reportone || manager==reporttwo){
+		numberofreports++;
+	}
+	OrgChart *lowestcommonmanager= numberofreports==2? manager:nullptr;
+	orginfo neworginfo={lowestcommonmanager,numberofreports};
+	return neworginfo;
+		
+}
+
+OrgChart *getLowestCommonManager(OrgChart *topManager, OrgChart *reportOne,
+                                 OrgChart *reportTwo) {
+  // Write your code here.
+	return getorginfo(topManager,reportOne,reportTwo).lowestcommonmanager;
+  
+}
