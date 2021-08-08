@@ -1,0 +1,27 @@
+class orginfo:
+	def __init__(self,lowestcommonmanager,numberofreports):
+		self.lowestcommonmanager=lowestcommonmanager
+		self.numberofreports=numberofreports
+
+
+def getLowestCommonManager(topmanager, reportone, reporttwo):
+    # Write your code here.
+	return getorginfo(topmanager,reportone,reporttwo).lowestcommonmanager
+
+def getorginfo(manager,reportone,reporttwo):
+	numberofreports=0
+	for node in manager.directReports:
+		Orginfo=getorginfo(node,reportone,reporttwo)
+		if Orginfo.lowestcommonmanager is not None:
+			return Orginfo
+		numberofreports+=Orginfo.numberofreports
+	if manager==reportone or manager==reporttwo:
+		numberofreports+=1
+	lowestcommonmanager=manager if numberofreports==2 else None
+	return orginfo(lowestcommonmanager,numberofreports)
+	
+# This is an input class. Do not edit.
+class OrgChart:
+    def __init__(self, name):
+        self.name = name
+        self.directReports = []
