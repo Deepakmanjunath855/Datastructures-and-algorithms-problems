@@ -1,0 +1,28 @@
+def findThreeLargestNumbers(array):
+    # Write your code here.
+	largest=[None,None,None]
+	maxi=float("-inf")
+	index1=0
+	index2=0
+	for i in range(len(array)):
+		if array[i]>maxi:
+			maxi=array[i]
+			index1=i
+			
+	largest[2]=maxi
+	maxi=float("-inf")
+	
+	for i in range(len(array)):
+		if array[i]>maxi and i != index1:
+			maxi=array[i]
+			index2=i
+			
+	largest[1]=maxi
+	maxi=float("-inf") 
+	
+	for i in range(len(array)):
+		if array[i]>maxi and i != index1 and i!=index2:
+			maxi=array[i]
+	largest[0]=maxi
+	
+    return largest
