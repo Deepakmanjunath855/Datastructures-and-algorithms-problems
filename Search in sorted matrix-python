@@ -1,0 +1,14 @@
+def searchInSortedMatrix(matrix, target):
+    # Write your code here.
+	row=0
+	rowlen=len(matrix)
+	collen=len(matrix[0])
+	col=collen-1
+	while row<rowlen and col>=0:
+		if target==matrix[row][col]:
+			return [row,col]
+		if target>matrix[row][col]:
+			row+=1
+		elif target<matrix[row][col]:
+			col-=1
+	return[-1,-1]
