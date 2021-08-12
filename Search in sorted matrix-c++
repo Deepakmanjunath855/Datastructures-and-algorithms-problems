@@ -1,0 +1,22 @@
+#include <vector>
+using namespace std;
+
+vector<int> searchInSortedMatrix(vector<vector<int>> matrix, int target) {
+  // Write your code here.
+  int row=0;
+	int rowlen=matrix.size();
+	int collen=matrix[0].size();
+	int col=collen-1;
+	while( row<rowlen and col>=0){
+		if(target==matrix[row][col]){
+		return {row,col};
+		}
+		if(target>matrix[row][col]){
+			row++;
+		}
+		else if(target<matrix[row][col]){
+			col--;
+		}
+	}
+	return {-1,-1};
+}
