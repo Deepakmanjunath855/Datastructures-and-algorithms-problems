@@ -1,0 +1,41 @@
+#include <vector>
+using namespace std;
+int shiftedbinarysearchhelper(vector<int> array,int target,int left,int right);
+int shiftedbinarysearchhelper(vector<int> array,int target,int left,int right){
+	if(left>right){
+		return -1;
+	}
+	int middle=(left+right)/2;
+	int potentialmatch=array[middle];
+	int leftelement=array[left];
+	int rightelement=array[right];
+	
+	if(target==potentialmatch){
+		return middle;
+	}
+	//left half is sorted
+	else if(leftelement<=potentialmatch){  
+		//if target is in left half
+		if(target<potentialmatch && target>=leftelement){
+			return shiftedbinarysearchhelper(array,target,left,middle-1);
+		}
+		// if target is in right half
+		else{
+			return shiftedbinarysearchhelper(array,target,middle+1,right);
+		}
+	}
+	//left half is not sorted and right half is sorted.
+	else{
+		//target is in right half
+		if(target>potentialmatch && target<=rightelement){
+			return shiftedbinarysearchhelper(array,target,middle+1,right);
+		}
+		//target is in left half
+		else{
+			return shiftedbinarysearchhelper(array,target,left,middle-1);
+		}
+	}
+}
+int shiftedBinarySearch(vector<int> array, int target) {
+  return shiftedbinarysearchhelper(array,target,0,array.size()-1);
+}
