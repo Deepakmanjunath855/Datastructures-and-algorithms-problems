@@ -1,0 +1,27 @@
+def searchForRange(array, target):
+    targetrange=[-1,-1]
+	searchforrangehelper(array,target,0,len(array)-1,True,targetrange)
+	searchforrangehelper(array,target,0,len(array)-1,False,targetrange)
+	return targetrange
+
+def searchforrangehelper(array,target,left,right,goleft,targetrange):
+	if left>right:
+		return
+	mid=(right+left)//2
+	if target<array[mid]:
+		searchforrangehelper(array,target,left,mid-1,goleft,targetrange)
+	elif target>array[mid]:
+		searchforrangehelper(array,target,mid+1,right,goleft,targetrange)
+	else:
+		if goleft:
+			if mid==0 or array[mid-1]!=target:
+				targetrange[0]=mid
+			else:
+				searchforrangehelper(array,target,left,mid-1,goleft,targetrange)
+		else:
+			if mid==len(array)-1 or array[mid+1]!=target:
+				targetrange[1]=mid
+			else:
+				searchforrangehelper(array,target,mid+1,right,goleft,targetrange)
+				
+	
