@@ -1,0 +1,43 @@
+#include <vector>
+using namespace std;
+void searchforrangehelper(vector<int>array,int target,int left,int right,bool isleft,vector<int> &targetrange);
+
+
+vector<int> searchForRange(vector<int> array, int target) {
+  vector<int>targetrange{-1,-1};
+	searchforrangehelper(array,target,0,array.size()-1,true,targetrange);
+	searchforrangehelper(array,target,0,array.size()-1,false,targetrange);
+	return targetrange;
+}
+
+void searchforrangehelper(vector<int>array,int target,int left,int right,bool isleft,vector<int> &targetrange){
+	if( left>right){
+		return;
+	}
+	int mid=(left+right)/2;
+	
+	if(target<array[mid]){
+		searchforrangehelper(array,target,left,mid-1,isleft,targetrange);
+	}
+	else if(target>array[mid]){
+		searchforrangehelper(array,target,mid+1,right,isleft,targetrange);
+	}
+	else{
+		if(isleft){
+			if(mid==0 || array[mid-1]!=target){
+				targetrange[0]=mid;
+			}
+			else{
+				searchforrangehelper(array,target,left,mid-1,isleft,targetrange);
+			}	
+		}
+		else{
+			if(mid==array.size()-1 || array[mid+1]!=target ){
+				targetrange[1]=mid;
+			}
+			else{
+				searchforrangehelper(array,target,mid+1,right,isleft,targetrange);
+			}	
+		}	
+	}	
+}
