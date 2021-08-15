@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+#include <vector>
+using namespace std;
+int quickselecthelper(vector<int> array,int startidx,int endidx,int position);
+int quickselecthelper(vector<int> array,int startidx,int endidx,int position){
+	while(true){
+		if(startidx>endidx){
+			perror("this shhould not occur");
+		}
+		int pivotidx=startidx;
+		int leftidx=startidx+1;
+		int rightidx=endidx;
+		while(leftidx<=rightidx){
+		if(array[leftidx]>array[pivotidx] && array[rightidx]<array[pivotidx]){
+			swap(array[leftidx],array[rightidx]);
+		}
+		if(array[leftidx]<=array[pivotidx]){
+			leftidx++;
+		}
+		if(array[rightidx]>=array[pivotidx]){
+			rightidx--;
+		}
+		}
+		swap(array[rightidx],array[pivotidx]);
+		if(rightidx==position){
+			return array[rightidx];
+		}
+		else if(rightidx>position){
+		endidx=rightidx-1;
+		}
+		else{
+			startidx=rightidx+1;
+		}
+	}
+	
+}
+int quickselect(vector<int> array, int k) {
+	int position=k-1;
+	return quickselecthelper(array,0,array.size()-1,position);
+}
