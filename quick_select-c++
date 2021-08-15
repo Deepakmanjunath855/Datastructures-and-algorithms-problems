@@ -1,0 +1,28 @@
+def quickselect(array, k):
+	position=k-1
+	return quickselecthelper(array,0,len(array)-1,position)
+
+def quickselecthelper(array,startidx,endidx,position):
+	while True:
+		if startidx>endidx:
+			raise Exception("this condition should not occur")
+		pivotidx=startidx
+		leftidx=startidx+1
+		rightidx=endidx
+		while leftidx<=rightidx:
+			if array[leftidx]>array[pivotidx] and array[rightidx]<array[pivotidx]:
+				swap(array,leftidx,rightidx)
+			if array[leftidx]<=array[pivotidx]:
+				leftidx+=1
+			if array[rightidx]>=array[pivotidx]:
+				rightidx-=1
+		swap(array,pivotidx,rightidx)
+		if rightidx==position:
+			return array[rightidx]
+		elif rightidx < position:
+			startidx=rightidx+1
+		else:
+			endidx=rightidx-1
+			
+def swap(array,left,right):
+	array[left],array[right]=array[right],array[left]
