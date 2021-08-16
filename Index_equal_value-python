@@ -1,0 +1,25 @@
+#include <vector>
+using namespace std;
+
+int indexEqualsValue(vector<int> array) {
+  // Write your code here.
+	int leftidx=0;
+	int rightidx=array.size()-1;
+	while( leftidx<=rightidx){
+		int mididx=leftidx+(rightidx-leftidx)/2;
+		int midval=array[mididx];
+		if(midval<mididx){
+			leftidx=mididx+1;
+		}
+		else if(midval==mididx and mididx==0){
+			return mididx;
+		}
+		else if(midval==mididx and array[mididx-1]<mididx-1){
+			return mididx;
+		}
+		else{
+			rightidx=mididx-1;
+		}
+	}
+  return -1;
+}
