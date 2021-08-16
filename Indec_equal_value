@@ -1,0 +1,15 @@
+def indexEqualsValue(array):
+    leftidx=0
+	rightidx=len(array)-1
+	while leftidx<=rightidx:
+		middleidx=leftidx+(rightidx-leftidx)//2
+		midelement=array[middleidx]
+		if midelement<middleidx:
+			leftidx=middleidx+1
+		elif midelement==middleidx and middleidx==0:
+			return middleidx
+		elif midelement==middleidx and array[middleidx-1]<middleidx-1:
+			return middleidx
+		else:
+			rightidx=middleidx-1
+	return -1
