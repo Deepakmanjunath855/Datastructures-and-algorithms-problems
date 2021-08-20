@@ -1,0 +1,18 @@
+#include <vector>
+using namespace std;
+
+vector<int> selectionSort(vector<int> array) {
+  // Write your code here.
+	int startidx=0;
+	while(startidx<array.size()-1){
+		int smallestidx=startidx;
+		for(int i=startidx+1;i<array.size();i++){
+		if(array[smallestidx]>array[i]){
+			smallestidx=i;
+		}
+		}
+		swap(array[startidx],array[smallestidx]);
+		startidx++;
+	}
+	return array;
+}
