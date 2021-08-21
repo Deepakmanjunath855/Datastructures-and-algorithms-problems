@@ -1,0 +1,42 @@
+#include <vector>
+#include<bits/stdc++.h>
+using namespace std;
+
+void quicksorthelper(vector<int>&array,int startidx,int endidx){
+	if(startidx>=endidx){
+		return;
+	}
+	int pivotidx=startidx;
+	int leftidx=startidx+1;
+	int rightidx=endidx;
+	while(rightidx>=leftidx){
+		if(array.at(leftidx)>array.at(pivotidx) && array.at(rightidx)<array.at(pivotidx)){
+			swap(array[leftidx],array[rightidx]);
+		}
+		if(array.at(leftidx)<=array.at(pivotidx)){
+			leftidx++;
+		}
+		if(array.at(rightidx)>=array.at(pivotidx)){
+			rightidx--;
+		}
+	}
+	swap(array[pivotidx],array[rightidx]);
+	bool issubarraysmaller=rightidx-1-startidx<endidx-(rightidx+1);
+	if(issubarraysmaller){
+	quicksorthelper(array,startidx,rightidx-1);
+	quicksorthelper(array,rightidx+1,endidx);	
+	}
+	else{
+		quicksorthelper(array,rightidx+1,endidx);
+		quicksorthelper(array,startidx,rightidx-1);
+	}
+	
+}
+
+vector<int> quickSort(vector<int> array) {
+  // Write your code here.
+	quicksorthelper(array,0,array.size()-1);
+  return array;
+}
+
+
