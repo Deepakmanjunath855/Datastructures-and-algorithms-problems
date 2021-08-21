@@ -1,0 +1,12 @@
+def threeNumberSort(array, order):
+    # Write your code here.
+	ptr=0
+	for i in range(len(order)):
+		for j in range(ptr,len(array)):
+			if order[i]==array[j]:
+				swap(ptr,j,array)
+				ptr+=1
+	return array
+
+def swap(i,j,array):
+	array[i],array[j]=array[j],array[i]
