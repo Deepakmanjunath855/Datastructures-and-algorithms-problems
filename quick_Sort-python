@@ -1,0 +1,28 @@
+def quickSort(array):
+    quicksorthelper(array,0,len(array)-1)
+	return array
+
+def quicksorthelper(array,startidx,endidx):
+	if startidx>=endidx:
+		return
+	pivotidx=startidx
+	leftidx=startidx+1
+	rightidx=endidx
+	while rightidx>=leftidx:
+		if array[leftidx]>array[pivotidx] and array[rightidx]<array[pivotidx]:
+			swap(leftidx,rightidx,array)
+		if  array[leftidx]<=array[pivotidx]:
+			leftidx+=1
+		if array[rightidx]>=array[pivotidx]:
+			rightidx-=1
+	swap(pivotidx,rightidx,array)
+	isleftsubarraysmall=rightidx-1-startidx<endidx-(rightidx+1)
+	if isleftsubarraysmall:
+		quicksorthelper(array,startidx,rightidx-1)
+		quicksorthelper(array,rightidx+1,endidx)
+	else:
+		quicksorthelper(array,rightidx+1,endidx)
+		quicksorthelper(array,startidx,rightidx-1)
+
+def swap(i,j,array):
+	array[i],array[j]=array[j],array[i]
