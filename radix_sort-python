@@ -1,0 +1,33 @@
+def radixSort(array):
+    # Write your code here.
+	if len(array)==0:
+		return array
+    maxnumber=max(array)
+	
+	digit =0
+	while maxnumber/10 ** digit>0:
+		countingsort(array,digit)
+		digit+=1
+	return array
+
+def countingsort(array,digit):
+	sortedarray=[0]*len(array)
+	countarray=[0]*10
+	
+	digitcolumn=10**digit
+	
+	for num in array:
+		countindex=(num//digitcolumn)%10
+		countarray[countindex]+=1
+		
+	for  idx in range(1,10):
+		countarray[idx]+=countarray[idx-1]
+		
+	for idx in range(len(array)-1,-1,-1):
+		countindex=(array[idx]//digitcolumn)%10
+		countarray[countindex]-=1
+		sortedindex=countarray[countindex]
+		sortedarray[sortedindex]=array[idx]
+	
+	for idx in range(len(array)):
+		array[idx]=sortedarray[idx]
