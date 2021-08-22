@@ -1,0 +1,42 @@
+#include <vector>
+using namespace std;
+vector<int>mergesortedarrays(vector<int>lefthalf,vector<int>righthalf);
+vector<int>mergesortedarrays(vector<int>lefthalf,vector<int>righthalf){
+	int i=0;//left array pointer
+	int k=0;//sortedarray pointer
+	int j=0;//right array pointer
+	vector<int>sortedarray(lefthalf.size()+righthalf.size(),0);
+	while(i<lefthalf.size() && j<righthalf.size()){
+		if(lefthalf[i]<=righthalf[j]){
+			sortedarray[k]=lefthalf[i];
+			i++;
+		}
+		else{
+			sortedarray[k]=righthalf[j];
+			j++;
+		}
+		k++;
+	}
+	while(i<lefthalf.size()){
+		sortedarray[k]=lefthalf[i];
+		i++;
+		k++;
+	}
+	while(j<righthalf.size()){
+		sortedarray[k]=righthalf[j];
+		j++;
+		k++;
+	}
+	return sortedarray;
+}
+	
+vector<int> mergeSort(vector<int> array) {
+	if(array.size()==1){
+		return array;
+	}
+	int mid=array.size()/2;
+	vector<int>lefthalf(array.begin(),array.begin()+mid);
+	vector<int>righthalf(array.begin()+mid,array.end());
+	return mergesortedarrays(mergeSort(lefthalf),mergeSort(righthalf));
+	
+}
