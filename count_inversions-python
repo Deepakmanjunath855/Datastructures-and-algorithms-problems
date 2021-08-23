@@ -1,0 +1,30 @@
+def countInversions(array):
+    return countsubarrayinversions(array,0,len(array))
+
+def countsubarrayinversions(array,start,end):
+	if end-start<=1:
+		return 0
+	middle=start+(end-start)//2
+	leftinversions=countsubarrayinversions(array,start,middle)
+	rightinversions=countsubarrayinversions(array,middle,end)
+	mergedinversions=mergesortandcountinversions(array,start,middle,end)
+	return leftinversions+rightinversions+mergedinversions
+
+def mergesortandcountinversions(array,start,middle,end):
+	left=start
+	right=middle
+	inversions=0
+	sortedarray=[]
+	
+	while left<middle and right<end:
+		if array[left]<=array[right]:
+			sortedarray.append(array[left])
+			left+=1
+		else:
+			inversions+=middle-left
+			sortedarray.append(array[right])
+			right+=1
+	sortedarray+=array[left:middle]+array[right:end]	
+	for idx,num in enumerate(sortedarray):
+		array[start+idx]=num
+	return inversions
