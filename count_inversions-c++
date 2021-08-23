@@ -1,0 +1,56 @@
+#include <vector>
+#include<bits/stdc++.h>
+using namespace std;
+int countsubarrayinversions(vector<int>&array,int start,int end);
+int mergesortinversions(vector<int>&array,int start,int middle,int end);
+
+int countInversions(vector<int> array) {
+  // Write your code here.
+  return countsubarrayinversions(array,0,array.size());
+}
+
+int mergesortinversions(vector<int>&array,int start,int middle,int end){
+	int left=start;
+	int right=middle;
+	int inversions=0;
+	vector<int>sortedarray;
+	
+	while( left<middle && right<end){
+	if(array[left]<=array[right]){
+		sortedarray.push_back(array[left]);
+		left++;
+	}
+	else{
+		inversions+=middle-left;
+		sortedarray.push_back(array[right]);
+		right++;
+		}
+	}
+	for(int idx=left;idx<middle;idx++){
+	sortedarray.push_back(array[idx]);
+	}
+	for(int idx=right;idx<end;idx++){
+		sortedarray.push_back(array[idx]);
+	}
+	for(int idx=0;idx<sortedarray.size();idx++){
+		int num=sortedarray[idx];
+		array[start+idx]=num;
+	}
+	return inversions;
+}
+
+
+int countsubarrayinversions(vector<int>&array,int start,int end){
+	if(end-start<=1){
+		return 0;
+	}
+	int middle=start+((end-start)/2);
+	int leftinversions=countsubarrayinversions(array,start,middle);
+	int rightinversions=countsubarrayinversions(array,middle,end);
+	int mergedinversions=mergesortinversions(array,start,middle,end);
+	return leftinversions+rightinversions+mergedinversions;
+	
+}
+
+
+
