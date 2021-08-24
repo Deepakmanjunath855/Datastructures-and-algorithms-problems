@@ -1,0 +1,24 @@
+using namespace std;
+
+// This is an input struct. Do not edit.
+class LinkedList {
+public:
+  int value;
+  LinkedList *next = nullptr;
+
+  LinkedList(int value) { this->value = value; }
+};
+
+LinkedList *removeDuplicatesFromLinkedList(LinkedList *linkedList) {
+  LinkedList* currentnode=linkedList;
+	while(currentnode !=nullptr){
+		LinkedList* nextdistinctnode=currentnode->next;
+		while(nextdistinctnode !=nullptr
+				 && nextdistinctnode->value==currentnode->value){
+			nextdistinctnode=nextdistinctnode->next;
+		}
+		currentnode->next=nextdistinctnode;
+		currentnode=nextdistinctnode;
+	}
+	return linkedList;
+}
