@@ -1,0 +1,18 @@
+# This is an input class. Do not edit.
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+def removeDuplicatesFromLinkedList(linkedList):
+    currentnode=linkedList
+	while currentnode is not None:
+		nextdistinctnode=currentnode.next
+		while nextdistinctnode is not None and nextdistinctnode.value == currentnode.value:
+			nextdistinctnode=nextdistinctnode.next
+		currentnode.next=nextdistinctnode
+		currentnode=nextdistinctnode
+	return linkedList
+			
+		
