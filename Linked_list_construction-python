@@ -1,0 +1,95 @@
+# This is an input class. Do not edit.
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.prev = None
+        self.next = None
+
+
+# Feel free to add new properties and methods to the class.
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def setHead(self, node):
+        if self.head is None:
+			self.head=node
+			self.tail=node
+			return
+		self.insertBefore(self.head,node)
+
+    def setTail(self, node):
+        if self.tail is None:
+			self.setHead(node)
+			return 
+		self.insertAfter(self.tail,node)
+
+    def insertBefore(self, node, nodetoinsert):
+        if nodetoinsert==self.head and nodetoinsert==self.tail:
+			return
+		self.remove(nodetoinsert)
+		nodetoinsert.prev=node.prev
+		nodetoinsert.next=node
+		if node.prev is None:
+			self.head=nodetoinsert
+		else:
+			node.prev.next=nodetoinsert
+		node.prev=nodetoinsert
+
+
+    def insertAfter(self, node, nodetoinsert):
+        if nodetoinsert==self.head and nodetoinsert==self.tail:
+			return
+		self.remove(nodetoinsert)
+		nodetoinsert.prev=node
+		nodetoinsert.next=node.next
+		if node.next is None:
+			self.tail=nodetoinsert
+		else:
+			node.next.prev=nodetoinsert
+		node.next=nodetoinsert
+
+    def insertAtPosition(self, position, nodetoinsert):
+		if position==1:
+			self.setHead(nodetoinsert)
+			return
+		node=self.head
+		currentpos=1
+		while node is not None and currentpos!=position:
+			node=node.next
+			currentpos+=1
+		if node is not None:
+			self.insertBefore(node,nodetoinsert)
+		else:
+			self.setTail(nodetoinsert)
+        
+
+    def removeNodesWithValue(self, value):
+        node=self.head
+		while node is not None:
+			nodetoremove=node
+			node=node.next
+			if nodetoremove.value==value:
+				self.remove(nodetoremove)
+
+    def remove(self, node):
+        if node==self.head:
+			self.head=self.head.next
+		if node ==self.tail:
+			self.tail=self.tail.prev
+		self.removebindings(node)
+
+    def containsNodeWithValue(self, value):
+        node=self.head
+		while node is not None and node.value!=value:
+			node=node.next
+		return node is not None
+	
+	def removebindings(self,node):
+		if node.prev is not None:
+			node.prev.next=node.next
+		if node.next is not None:
+			node.next.prev=node.prev
+		node.prev=None
+		node.next=None
