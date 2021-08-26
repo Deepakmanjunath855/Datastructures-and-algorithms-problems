@@ -1,0 +1,128 @@
+using namespace std;
+
+class Node {
+public:
+  int value;
+  Node *prev;
+  Node *next;
+
+  Node(int value);
+};
+
+// Feel free to add new properties and methods to the class.
+class DoublyLinkedList {
+public:
+  Node *head;
+  Node *tail;
+
+  DoublyLinkedList() {
+    head = nullptr;
+    tail = nullptr;
+  }
+
+  void setHead(Node *node) {
+    if(head==nullptr){
+			head=node;
+			tail=node;
+			return;
+		}
+		insertBefore(head,node);
+  }
+
+  void setTail(Node *node) {
+    // Write your code here.
+		if(tail==nullptr){
+			setHead(node);
+			return;
+		}
+		insertAfter(tail,node);
+  }
+
+  void insertBefore(Node *node, Node *nodetoinsert) {
+    if(nodetoinsert==head && nodetoinsert==tail)
+			return;
+		remove(nodetoinsert);
+		nodetoinsert->prev=node->prev;
+		nodetoinsert->next=node;
+		if(node->prev ==nullptr){
+			head=nodetoinsert;
+		}
+		else{
+			node->prev->next=nodetoinsert;
+		}
+		node->prev=nodetoinsert;		
+  }
+
+  void insertAfter(Node *node, Node *nodetoinsert) {
+		if(nodetoinsert==head && nodetoinsert==tail){
+			return;
+		}
+		remove(nodetoinsert);
+		nodetoinsert->prev=node;
+		nodetoinsert->next=node->next;
+		if(node->next ==nullptr){
+			tail=nodetoinsert;
+		}
+		else{
+			node->next->prev=nodetoinsert;
+		}
+		node->next=nodetoinsert;		
+  }
+
+  void insertAtPosition(int position, Node *nodetoinsert) {
+    if(position==1){
+			setHead(nodetoinsert);
+			return;
+		}
+		Node *node=head;
+		int currentpos=1;
+		while(node!=nullptr && currentpos++!=position){
+			node=node->next;
+		}
+		if(node !=nullptr){
+			insertBefore(node,nodetoinsert);
+		}
+		else{
+			setTail(nodetoinsert);
+		}
+  }
+
+  void removeNodesWithValue(int value) {
+    Node *node=head;
+		while(node !=nullptr){
+			Node *nodetodelete=node;
+			node=node->next;
+			if(nodetodelete->value==value){
+				remove(nodetodelete);
+			}
+		}
+  }
+
+  void remove(Node *node) {
+    if(node == head){
+			head=head->next;
+		}
+		if(node== tail){
+			tail=tail->prev;
+		}
+		removenodebindings(node);
+  }
+
+  bool containsNodeWithValue(int value) {
+    Node *node=head;
+		while(node !=nullptr && node->value !=value){
+			node=node->next;
+		}
+		return node!=nullptr;
+  }
+	void removenodebindings(Node *node){
+		if(node->prev !=nullptr){
+			node->prev->next=node->next;
+		}
+		if(node->next !=nullptr){
+			node->next->prev=node->prev;
+		}
+		node->prev=nullptr;
+		node->next=nullptr;
+	}
+};
