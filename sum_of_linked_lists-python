@@ -1,0 +1,30 @@
+# This is an input class. Do not edit.
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+#O(max(m,n))time O(max(m,n))space
+def sumOfLinkedLists(linkedListOne, linkedListTwo):
+    newlinkedlisthead=LinkedList(0)
+	currentnode=newlinkedlisthead
+	
+	carry=0
+	nodeone=linkedListOne
+	nodetwo=linkedListTwo
+	
+	while nodeone is not None or nodetwo is not None or carry!=0:
+		valueone=nodeone.value if nodeone is not None else 0
+		valuetwo=nodetwo.value if nodetwo is not None else 0
+		
+		sumvalue=valueone+valuetwo+carry
+		newvalue=sumvalue%10
+		newnode=LinkedList(newvalue)
+		currentnode.next=newnode
+		currentnode=newnode
+		
+		carry=sumvalue//10
+		nodeone=nodeone.next if nodeone is not None else None
+		nodetwo=nodetwo.next if nodetwo is not None else None
+	return newlinkedlisthead.next
+		
