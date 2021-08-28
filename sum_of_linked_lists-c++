@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// This is an input struct. Do not edit.
+class LinkedList {
+public:
+  int value;
+  LinkedList *next = nullptr;
+
+  LinkedList(int value) { this->value = value; }
+};
+//O(max(m,n))time O(max(m,n))space
+LinkedList *sumOfLinkedLists(LinkedList *linkedListOne,
+                             LinkedList *linkedListTwo) {
+  LinkedList *nodeone=linkedListOne;
+	LinkedList *nodetwo=linkedListTwo;
+	LinkedList *newlisthead=new LinkedList(0);
+	LinkedList *currentnode=newlisthead;
+	int carry=0;
+	
+	while(nodeone !=nullptr || nodetwo !=nullptr || carry!=0){
+		int valueone= nodeone !=nullptr?nodeone->value:0;
+		int valuetwo=nodetwo !=nullptr ? nodetwo->value:0;
+		
+		int sumvalue=valueone+valuetwo+carry;
+		int newvalue=sumvalue%10;
+		LinkedList *node=new LinkedList(newvalue);
+		currentnode->next=node;
+		currentnode=node;
+		carry=sumvalue/10;
+		
+		nodeone= nodeone!=nullptr?nodeone->next:nullptr;
+		nodetwo= nodetwo!=nullptr?nodetwo->next:nullptr;
+	}
+		
+	
+	return newlisthead->next;
+}
