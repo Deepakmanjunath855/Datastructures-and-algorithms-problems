@@ -1,0 +1,27 @@
+using namespace std;
+
+class LinkedList {
+public:
+  int value;
+  LinkedList *next;
+
+  LinkedList(int value) {
+    this->value = value;
+    this->next = nullptr;
+  }
+};
+//O(n)time O(1)space
+LinkedList *reverseLinkedList(LinkedList *head) {
+  // Write your code here.
+	LinkedList *current=head;
+	LinkedList *prevnode=nullptr;
+	
+	while(current !=nullptr){
+		LinkedList *nextnode=current->next;
+		current->next=prevnode;
+		prevnode=current;
+		current=nextnode;
+		
+	}
+return prevnode;		
+}
