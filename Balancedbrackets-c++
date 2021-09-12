@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool balancedBrackets(string str) {
+  string openingbrackets="({[";
+	string closingbrackets=")}]";
+	map<char,char>matchingbrackets{{')','('},{'}','{'},{']','['}};
+	stack<char>stack;
+	
+	for(char charc:str){
+		if(openingbrackets.find(charc)!=string::npos){
+			stack.push(charc);
+		}
+		else if (closingbrackets.find(charc)!=string::npos){
+			if(stack.size()==0){
+				return false;
+			}
+			if(stack.top()==matchingbrackets[charc]){
+				stack.pop();
+			}
+			else{
+				return false;
+			}
+		}
+	}
+	
+  return stack.size()==0;
+}
