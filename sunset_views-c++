@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> sunsetViews(vector<int> buildings, string direction) {
+  vector<int>buildingwithsunsetviews;
+	int startidx=buildings.size()-1;
+	int step=-1;
+	if(direction=="EAST"){
+		startidx=0;
+		step=1;
+	}
+	int idx=startidx;
+	while(idx>=0 && idx<buildings.size()){
+		int buildingheight=buildings[idx];
+		
+		while(buildingwithsunsetviews.size()>0
+	 &&buildings[ buildingwithsunsetviews[buildingwithsunsetviews.size()-1]]<=buildingheight){
+			buildingwithsunsetviews.pop_back();
+		}
+	buildingwithsunsetviews.push_back(idx);
+	idx+=step;	
+	}
+	if(direction=="WEST"){
+		reverse(buildingwithsunsetviews.begin(),buildingwithsunsetviews.end());
+	}
+	return buildingwithsunsetviews;
+}
