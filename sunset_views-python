@@ -1,0 +1,21 @@
+def sunsetViews(buildings, direction):
+    currmax=0
+	idx=len(buildings)-1
+	res=[]
+	if direction=="EAST":
+		while idx>=0:
+			if buildings[idx]>currmax:
+				currmax=buildings[idx]
+				res.append(idx)
+			idx-=1
+	else:
+		for i in range(len(buildings)):
+			if buildings[i]>currmax:
+				currmax=buildings[i]
+				res.append(i)
+	res.sort()
+	return res
+		
+				
+			
+		
