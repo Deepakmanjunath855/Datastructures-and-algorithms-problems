@@ -1,0 +1,21 @@
+def sortStack(stack):
+    if len(stack)==0:
+		return stack
+	top=stack.pop()
+	sortStack(stack)
+	
+	insertinsortedorder(stack,top)
+	
+	return stack
+
+def insertinsortedorder(stack,top):
+	if len(stack)==0 or stack[len(stack)-1]<=top:
+		stack.append(top)
+		return
+	value=stack.pop()
+	
+	insertinsortedorder(stack,top)
+	stack.append(value)
+	return
+	
+	
