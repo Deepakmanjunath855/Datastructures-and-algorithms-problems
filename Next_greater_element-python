@@ -1,0 +1,14 @@
+def nextGreaterElement(array):
+	res=[-1]*len(array)
+	stack=[]
+	
+	for idx in range(2*len(array)):
+		circidx=idx % len(array)
+		
+		while len(stack)>0 and array[stack[len(stack)-1]]<array[circidx]:
+			top=stack.pop()
+			res[top]=array[circidx]
+		stack.append(circidx)
+	
+    
+	return res
