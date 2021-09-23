@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+#include <vector>
+using namespace std;
+
+int largestRectangleUnderSkyline(vector<int> buildings) {
+  int maxarea=0;
+	vector<int>pillarindices;
+	vector<int>extendedbuildings(buildings);
+	extendedbuildings.push_back(0);
+	for(int idx=0;idx<extendedbuildings.size();idx++){
+		int height=extendedbuildings[idx];
+		while(pillarindices.size()!=0 && 
+					extendedbuildings[pillarindices[pillarindices.size()-1]]>=height){
+			int pillarheight=extendedbuildings[pillarindices[pillarindices.size()-1]];
+			pillarindices.pop_back();
+			int width=pillarindices.size()==0?idx:idx-pillarindices[pillarindices.size()-1]-1;
+			maxarea=max(width*pillarheight,maxarea);
+		}
+		pillarindices.push_back(idx);
+	}
+	return maxarea;
+	
+}
