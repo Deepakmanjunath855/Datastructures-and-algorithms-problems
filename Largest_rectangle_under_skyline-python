@@ -1,0 +1,12 @@
+def largestRectangleUnderSkyline(buildings):
+    pillarindices=[]
+	maxarea=0
+	
+	for idx,height in enumerate(buildings+[0]):
+		while len(pillarindices)!=0 and buildings[pillarindices[-1]]>=height:
+			pillarheight=buildings[pillarindices.pop()]
+			width=idx if len(pillarindices)==0 else idx-pillarindices[-1]-1
+			maxarea=max(width *pillarheight,maxarea)
+		pillarindices.append(idx)
+		
+	return maxarea
