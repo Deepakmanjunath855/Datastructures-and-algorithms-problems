@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// This is the class of the input root. Do not edit it.
+class BinaryTree {
+public:
+  int value;
+  BinaryTree *left;
+  BinaryTree *right;
+
+  BinaryTree(int value) {
+    this->value = value;
+    left = nullptr;
+    right = nullptr;
+  }
+};
+
+void branchsumhelper(BinaryTree *node,int runningsum,vector<int>&sums);
+void branchsumhelper(BinaryTree *node,int runningsum,vector<int>&sums){
+	if (node==nullptr){
+return;
+	}
+	int newrunningsum=runningsum + node->value;
+	if(node->left==nullptr && node->right ==nullptr){
+		sums.push_back(newrunningsum);
+		return;
+	}
+	branchsumhelper(node->left,newrunningsum,sums);
+	branchsumhelper(node->right,newrunningsum,sums);
+	return;
+	
+}
+
+vector<int> branchSums(BinaryTree *root) {
+  vector<int>sums;
+	branchsumhelper(root,0,sums);
+	return sums;
+}
