@@ -1,0 +1,24 @@
+# This is the class of the input root. Do not edit it.
+class BinaryTree:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+#O(n)time O(n)space
+def branchSums(root):
+    sums=[]
+	branchsumshelper(root,0,sums)
+	return sums
+
+def branchsumshelper(root,currentsum,sums):
+	if root is None:
+		return
+	newcurrentsum=currentsum+root.value
+	if root.right is None and root.left is None:
+		sums.append(newcurrentsum)
+		return
+	branchsumshelper(root.left,newcurrentsum,sums)
+	branchsumshelper(root.right,newcurrentsum,sums)
+	return
+	
